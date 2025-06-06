@@ -1,25 +1,40 @@
-//CREATE a Project class to store info in the object
-    //projectName
-    //New array for todos
-
-class Project{
-    static projectsList = {};
+export default class Project{
+    static projectsList = [];
 
     constructor(name){
         this.name = name;
         this.tasks = [];
-        projectsList[this.name] = this;
+        Project.projectsList.push(this);
     }
 
-    editName(name){
+    setName(name){
         this.name = name;
     }
 
-    deleteTask(task){
-        delete this.tasks[task];
+    addTask(task){
+        this.tasks.push(task);
     }
 
-    deleteProject(project){
-        delete Project.projectsList[project];
+    getTask(taskName){
+        for (let task of this.tasks){
+            if (task.name == taskName) return task;
+        }
     }
+
+    deleteTask(taskName){
+        for (let i = 0; i < this.tasks.length; i++){
+            let task = this.tasks[i];
+
+            if (task.name == taskName) this.tasks.splice(i, 1);
+        }
+    }
+
+    deleteProject(projectName){
+        for (let i = 0; i < Project.projectsList.length; i++){
+            let project = Project.projectsList[i];
+
+            if (project.name == projectName) Project.projectsList.splice(i, 1);
+        }
+    }
+
 }
