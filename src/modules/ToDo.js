@@ -10,8 +10,9 @@ export default class Task{
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
-        this.priority = priority,
+        this.priority = priority;
         this.status = "pending";
+        this.id = "task-" + crypto.randomUUID();
     }
 
     setInfo(title, description, dueDate, priority){

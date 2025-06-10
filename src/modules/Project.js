@@ -3,6 +3,7 @@ export default class Project{
 
     constructor(name){
         this.name = name;
+        this.id = "proj-" + crypto.randomUUID();
         this.tasks = [];
         Project.projectsList.push(this);
     }
@@ -15,25 +16,33 @@ export default class Project{
         this.tasks.push(task);
     }
 
-    getTask(taskName){
+    getTask(taskId){
         for (let task of this.tasks){
-            if (task.name == taskName) return task;
+            if (task.id == taskId) return task;
         }
     }
 
-    deleteTask(taskName){
+    deleteTask(taskId){
         for (let i = 0; i < this.tasks.length; i++){
             let task = this.tasks[i];
 
-            if (task.name == taskName) this.tasks.splice(i, 1);
+            if (task.id == taskId) this.tasks.splice(i, 1);
         }
     }
 
-    deleteProject(projectName){
+    static getProject(projectId){
         for (let i = 0; i < Project.projectsList.length; i++){
             let project = Project.projectsList[i];
 
-            if (project.name == projectName) Project.projectsList.splice(i, 1);
+            if (project.id == projectId) return project;
+        }
+    }
+
+    static deleteProject(projectId){
+        for (let i = 0; i < Project.projectsList.length; i++){
+            let project = Project.projectsList[i];
+
+            if (project.id == projectId) Project.projectsList.splice(i, 1);
         }
     }
 
